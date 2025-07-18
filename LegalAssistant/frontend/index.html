@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Android Chat UI</title>
+  <link href="style.css" rel="stylesheet">
+  <script defer src="script.js"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200 flex justify-center items-center min-h-screen">
+
+  <!-- Phone Frame -->
+  <div class="w-[375px] h-[667px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-300 flex flex-col">
+    
+    <!-- Status Bar -->
+    <div class="h-10 bg-gray-100 flex justify-between items-center px-4 text-sm text-gray-600 font-semibold">
+      <span>9:41</span>
+      <div class="flex space-x-1 items-center">
+        <span>📶</span>
+        <span>📡</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat" class="flex-1 p-4 overflow-y-auto space-y-2 bg-white text-sm">
+      <!-- Messages will appear here -->
+    </div>
+
+    <!-- Input Area -->
+    <div class="bg-gray-100 p-3 flex items-center space-x-2">
+      <input id="userInput" type="text" placeholder="Type a message..."
+        class="flex-1 px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      <button id="sendBtn" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Send</button>
+    </div>
+  </div>
+
+</body>
+</html>
