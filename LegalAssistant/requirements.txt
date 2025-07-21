@@ -1,2 +1,11 @@
+# Frontend
 flask
 flask-cors
+faiss-cpu
+# Model
+sentence-transformers
+PyMuPDF
+transformers
+accelerate
+torch
+numpy
