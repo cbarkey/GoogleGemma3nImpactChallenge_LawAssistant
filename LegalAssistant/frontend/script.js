@@ -1,33 +1,33 @@
-document.getElementById('sendBtn').addEventListener('click', async () => {
-    const inputElement = document.getElementById('userInput');
-    const message = inputElement.value.trim();
-    if (!message) return;
+const pages = {
+  chat: document.getElementById('page-chat'),
+  resources: document.getElementById('page-resources'),
+  settings: document.getElementById('page-settings'),
+};
 
-    appendMessage(message, 'user');
-    inputElement.value = '';
-
-    try {
-        const response = await fetch('http://localhost:5000/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message })
-        });
-
-        const data = await response.json();
-        appendMessage(data.response, 'bot');
-    } catch (err) {
-        console.error('Error:', err);
-        appendMessage('Failed to connect to server.', 'bot');
-    }
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    Object.values(pages).forEach(page => page.classList.add('hidden'));
+    pages[target].classList.remove('hidden');
+  });
 });
 
-function appendMessage(message, sender) {
-    const chatBox = document.getElementById('chat');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = sender;
-    messageDiv.innerText = message;
-    chatBox.appendChild(messageDiv);
+document.getElementById('sendBtn').addEventListener('click', () => {
+  const input = document.getElementById('userInput');
+  const chatBox = document.getElementById('chat');
+  const text = input.value.trim();
+  if (text) {
+    const msg = document.createElement('div');
+    msg.textContent = `👤: ${text}`;
+    chatBox.appendChild(msg);
+    input.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
-}
+  }
+});
+
+document.getElementById('deleteBtn').addEventListener('click', () => {
+  if (confirm("Delete all conversations and personal data?")) {
+    document.getElementById('chat').innerHTML = '';
+    alert("Data deleted.");
+  }
+});

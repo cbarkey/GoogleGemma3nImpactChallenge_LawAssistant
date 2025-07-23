@@ -2,38 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Android Chat UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legal Assistant App</title>
   <link href="style.css" rel="stylesheet">
   <script defer src="script.js"></script>
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              100: "#e6ecf4",
+              300: "#3b4f6f",
+              500: "#1d2b44",
+              700: "#101d33",
+              900: "#0a1324"
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-gray-200 flex justify-center items-center min-h-screen">
+<body class="bg-gray-300 flex justify-center items-center min-h-screen font-sans">
 
   <!-- Phone Frame -->
-  <div class="w-[375px] h-[667px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-300 flex flex-col">
-    
+  <div class="w-[375px] h-[667px] bg-navy-900 rounded-[2rem] shadow-2xl overflow-hidden border border-gray-400 flex flex-col">
+
     <!-- Status Bar -->
-    <div class="h-10 bg-gray-100 flex justify-between items-center px-4 text-sm text-gray-600 font-semibold">
+    <div class="h-10 bg-navy-700 text-white flex justify-between items-center px-4 text-sm font-semibold">
       <span>9:41</span>
       <div class="flex space-x-1 items-center">
-        <span>📶</span>
-        <span>📡</span>
-        <span>🔋</span>
+        <span>📶</span><span>📡</span><span>🔋</span>
       </div>
     </div>
 
-    <!-- Chat Window -->
-    <div id="chat" class="flex-1 p-4 overflow-y-auto space-y-2 bg-white text-sm">
-      <!-- Messages will appear here -->
+    <!-- Page Container -->
+    <div class="flex-1 relative overflow-hidden">
+      <!-- Chat Page -->
+      <div id="page-chat" class="absolute inset-0 bg-navy-900 text-white flex flex-col">
+        <div class="flex-1 p-4 overflow-y-auto space-y-2 text-sm" id="chat">
+          <p class="text-navy-100 text-xs">Welcome! Ask your immigration law question.</p>
+        </div>
+        <div class="bg-navy-700 p-3 flex items-center space-x-2">
+          <input id="userInput" type="text" placeholder="Type a message..."
+            class="flex-1 px-3 py-2 rounded-full border border-navy-300 bg-navy-500 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          <button id="sendBtn" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Send</button>
+        </div>
+      </div>
+
+      <!-- Resources Page -->
+      <div id="page-resources" class="absolute inset-0 bg-navy-900 text-white p-4 hidden overflow-y-auto text-sm">
+        <h2 class="text-lg font-bold mb-3">Resources</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li><a href="#" class="text-blue-300 underline">Form I-485 Instructions</a></li>
+          <li><a href="#" class="text-blue-300 underline">USCIS Green Card FAQ</a></li>
+          <li><a href="#" class="text-blue-300 underline">Your Downloads</a></li>
+        </ul>
+      </div>
+
+      <!-- Settings Page -->
+      <div id="page-settings" class="absolute inset-0 bg-navy-900 text-white p-4 hidden text-sm">
+        <h2 class="text-lg font-bold mb-3">Settings</h2>
+        <button id="deleteBtn" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded">
+          Delete All Conversations & Data
+        </button>
+      </div>
     </div>
 
-    <!-- Input Area -->
-    <div class="bg-gray-100 p-3 flex items-center space-x-2">
-      <input id="userInput" type="text" placeholder="Type a message..."
-        class="flex-1 px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" />
-      <button id="sendBtn" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Send</button>
+    <!-- Bottom Navigation Bar -->
+    <div class="h-14 bg-navy-700 text-white flex justify-around items-center text-sm border-t border-navy-500">
+      <button data-target="chat" class="nav-btn flex flex-col items-center">
+        💬<span class="text-xs">Chat</span>
+      </button>
+      <button data-target="resources" class="nav-btn flex flex-col items-center">
+        📚<span class="text-xs">Resources</span>
+      </button>
+      <button data-target="settings" class="nav-btn flex flex-col items-center">
+        ⚙️<span class="text-xs">Settings</span>
+      </button>
     </div>
   </div>
 
