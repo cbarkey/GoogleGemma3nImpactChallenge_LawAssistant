@@ -9,3 +9,9 @@ transformers
 accelerate
 torch
 numpy
+faiss-cpu
+langchain
+langchain-community
+langchain-huggingface
+langchain-ollama
+ollama

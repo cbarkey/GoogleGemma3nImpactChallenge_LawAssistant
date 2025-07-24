@@ -74,8 +74,8 @@ class PdfDocumentIndexer:
             else:
                 print(f"Skipping {fname} — no chunks created")
 
-            self.documents.extend(chunks)
-            self.filenames.extend([fname] * len(chunks))
+            #self.documents.extend(chunks)
+            #self.filenames.extend([fname] * len(chunks))
 
         # Before embedding, confirm we have documents
         #print(f"📄 Total chunks to embed: {len(self.documents)}")
@@ -99,7 +99,7 @@ class PdfDocumentIndexer:
             pickle.dump({"documents": self.documents, "filenames": self.filenames}, f)
 
     def _load_index(self):
-        print("Loading FAISS index from disk...")
+        #print("Loading FAISS index from disk...")
         self.index = faiss.read_index(str(self.index_file))
         with open(self.metadata_file, 'rb') as f:
             data = pickle.load(f)
