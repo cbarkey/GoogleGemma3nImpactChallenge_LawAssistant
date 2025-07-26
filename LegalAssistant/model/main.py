@@ -43,14 +43,16 @@ def main():
     # Step 5: Create retriever
     retriever = vectorstore.as_retriever(search_kwargs={"k": 20})
 
-    # Step 6: Start Ollama with gemma3:4b model
-    print("Starting Ollama with gemma3:4b model...")
-    llm = OllamaLLM(model="gemma3:4b")
+    # Step 6: Start Ollama with gemma3n:e4b model
+    print("Starting Ollama with gemma3n:e4b model...")
+    llm = OllamaLLM(model="gemma3n:e4b")
 
     # Step 7: Prompt template
     prompt_template = """
     You are a helpful legal assistant. Use the following context to answer the user's question.
-
+    If the answer is not directly stated, try to infer it from the information provided.
+    Always cite the source document.
+    
     Context:
     {context}
 
