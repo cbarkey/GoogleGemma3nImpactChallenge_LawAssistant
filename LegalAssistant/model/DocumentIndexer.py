@@ -9,10 +9,19 @@ from sentence_transformers import SentenceTransformer
 
 class PdfDocumentIndexer:
     def __init__(self, pdf_folder, index_folder="index_data", model_name='all-MiniLM-L6-v2'):
-        self.pdf_folder = Path(pdf_folder)
-        self.index_folder = Path(index_folder)
-        self.index_file = self.index_folder / "faiss_index.index"
-        self.metadata_file = self.index_folder / "metadata.pkl"
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        
+        # self.pdf_folder = Path(pdf_folder)
+        # self.index_folder = Path(index_folder)
+        # self.index_file = self.index_folder / "faiss_index.index"
+        # self.metadata_file = self.index_folder / "metadata.pkl"
+
+        self.pdf_folder = Path(os.path.join(BASE_DIR, pdf_folder))
+        self.index_folder = Path(os.path.join(BASE_DIR, index_folder))
+        self.index_file = Path(os.path.join(self.index_folder, "faiss_index.index"))
+        self.metadata_file = Path(os.path.join(self.index_folder, "metadata.pkl"))
+
+
         self.embed_model = SentenceTransformer(model_name)
         self.documents = []
         self.filenames = []
