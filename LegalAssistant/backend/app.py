@@ -1,13 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import model
-from model.RAGPipeline import load_rag_chain, get_answer
+from model.RAGPipeline import RAGPipelineClass
 
 app = Flask(__name__)
 CORS(app)  # Enables CORS for all routes
 
 # Load the RAG System
-qa_chain = load_rag_chain()
+# qa_chain = load_rag_chain()
+RAG = RAGPipelineClass()
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -20,7 +21,7 @@ def chat():
     # response_text = f"You said: {user_message}"
 
     # Run the user input through the RAG Pipeline to get an answer
-    result = get_answer(user_message, qa_chain)
+    result = RAGPipelineClass.get_answer(user_message)
     
     print("Result:", result["answer"])
     return jsonify({"response": result})

@@ -59,17 +59,35 @@ class PdfDocumentIndexer:
                 print(f"Failed to process {pdf_file.name}: {e}")
         return texts, filenames
 
-    def _chunk_text(self, text, max_length=500):
-        sentences = text.split('. ')
+    def _chunk_text(self, text, max_length=5000):
+        # sentences = text.split('. ')
+        # chunks, chunk = [], ""
+        # for sentence in sentences:
+        #     if len(chunk) + len(sentence) < max_length:
+        #         chunk += sentence + ". "
+        #     else:
+        #         chunks.append(chunk.strip())
+        #         chunk = sentence + ". "
+        # if chunk:
+        #     chunks.append(chunk.strip())
+        # return chunks
+        paragraphs = text.split('\n\n')  # Two newlines usually denote a paragraph
         chunks, chunk = [], ""
-        for sentence in sentences:
-            if len(chunk) + len(sentence) < max_length:
-                chunk += sentence + ". "
+
+        for paragraph in paragraphs:
+            paragraph = paragraph.strip()
+            if not paragraph:
+                continue
+
+            if len(chunk) + len(paragraph) < max_length:
+                chunk += paragraph + "\n\n"
             else:
                 chunks.append(chunk.strip())
-                chunk = sentence + ". "
+                chunk = paragraph + "\n\n"
+
         if chunk:
             chunks.append(chunk.strip())
+
         return chunks
 
     def _create_index(self):

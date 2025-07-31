@@ -1,5 +1,5 @@
 # import DocumentIndexer
-from .RAGPipeline import load_rag_chain, get_answer
+from .RAGPipeline import RAGPipelineClass
 
 import faiss
 import pickle
@@ -76,7 +76,8 @@ def main():
     #     return_source_documents=True
     # )
 
-    qa_chain = load_rag_chain()
+    # qa_chain = load_rag_chain()
+    RAG = RAGPipelineClass()
 
     # Step 9: Ask questions
     while True:
@@ -84,7 +85,7 @@ def main():
         if query.lower() == "exit":
             break
         # result = qa_chain.invoke(query)
-        result = get_answer(query, qa_chain)
+        result = RAG.get_answer(query)
 
         print("\n🔎 Answer:\n", result["answer"])
         print("\n📄 Sources:", result["sources"], "\n")
